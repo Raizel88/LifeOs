@@ -1,0 +1,3 @@
+class LifeRadius {
+  LifeRadius._();
+}
