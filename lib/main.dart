@@ -42,9 +42,7 @@ class LifeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 7. Router
     return MaterialApp.router(
-      title: 'LifeOS',
       debugShowCheckedModeBanner: false,
       theme: LifeTheme.darkTheme,
       routerConfig: goRouter,

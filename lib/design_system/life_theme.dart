@@ -10,22 +10,24 @@ class LifeTheme {
   /// Returns the dark theme configuration.
   static ThemeData get darkTheme {
     return ThemeData(
-      useMaterial3: true,
       brightness: Brightness.dark,
+      useMaterial3: true,
+
       primaryColor: LifeColors.primary,
       scaffoldBackgroundColor: LifeColors.background,
+
       colorScheme: const ColorScheme.dark(
         primary: LifeColors.primary,
         secondary: LifeColors.secondary,
         surface: LifeColors.surface,
+        surfaceContainerHighest: LifeColors.surfaceVariant,
         error: LifeColors.error,
         onPrimary: LifeColors.onPrimary,
         onSecondary: LifeColors.onSecondary,
         onSurface: LifeColors.onSurface,
         onError: LifeColors.onError,
-        // ignore: deprecated_member_use
-        surfaceVariant: LifeColors.surfaceVariant,
       ),
+
       textTheme: TextTheme(
         displayLarge: LifeTypography.displayLarge,
         displayMedium: LifeTypography.displayMedium,
@@ -39,14 +41,17 @@ class LifeTheme {
         labelLarge: LifeTypography.labelLarge,
         labelMedium: LifeTypography.labelMedium,
       ),
-      cardTheme: const CardThemeData(
-        color: LifeColors.surface,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: LifeRadius.borderRadiusM,
-          side: BorderSide(color: LifeColors.border, width: 1),
+        cardTheme: const CardThemeData(
+            color: LifeColors.surface,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: LifeRadius.borderRadiusM,
+              side: BorderSide(
+                color: LifeColors.border,
+                width: 1,
+              ),
+            ),
         ),
-      ),
       appBarTheme: AppBarTheme(
         backgroundColor: LifeColors.background,
         elevation: 0,
