@@ -4,7 +4,7 @@ import '../features/auth/presentation/pages/forgot_password_page.dart';
 import '../features/auth/presentation/pages/login_page.dart';
 import '../features/auth/presentation/pages/register_page.dart';
 import '../features/auth/presentation/providers/auth_state_provider.dart';
-import '../features/dashboard/dashboard_page.dart';
+import '../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../features/developer/developer_page.dart';
 import '../features/onboarding/onboarding_page.dart';
 import '../features/settings/settings_page.dart';
@@ -49,7 +49,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const DeveloperPage(),
       ),
     ],
-    redirect: (context, state)
+    redirect: (context, state) {
       final status = authState.status;
       
       // Still checking authentication
@@ -60,7 +60,6 @@ final routerProvider = Provider<GoRouter>((ref) {
       final loggingIn = state.matchedLocation == '/login' ||
           state.matchedLocation == '/register' ||
           state.matchedLocation == '/forgot-password';
-
 
       if (status == AuthStatus.unauthenticated) {
         // If not authenticated and not already going to an auth page, redirect to login
