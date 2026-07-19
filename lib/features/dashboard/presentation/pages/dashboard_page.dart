@@ -3,7 +3,6 @@ import '../../../../design_system/life_spacing.dart';
 import '../../../../shared/widgets/life_scaffold.dart';
 import '../widgets/attribute_preview_card.dart';
 import '../widgets/daily_quote_card.dart';
-import '../widgets/dashboard_bottom_navigation.dart';
 import '../widgets/dashboard_header.dart';
 import '../widgets/quick_actions_card.dart';
 import '../widgets/task_preview_card.dart';
@@ -15,7 +14,7 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const LifeScaffold(
-      bottomNavigationBar: DashboardBottomNavigation(),
+      // Persistent navigation is now handled by MainNavigationShell
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

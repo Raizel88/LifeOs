@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../features/auth/presentation/pages/forgot_password_page.dart';
@@ -6,14 +7,23 @@ import '../features/auth/presentation/pages/register_page.dart';
 import '../features/auth/presentation/providers/auth_state_provider.dart';
 import '../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../features/developer/developer_page.dart';
+import '../features/journal/presentation/pages/journal_page.dart';
+import '../features/navigation/presentation/widgets/main_navigation_shell.dart';
 import '../features/onboarding/onboarding_page.dart';
+import '../features/profile/presentation/pages/profile_page.dart';
 import '../features/settings/settings_page.dart';
 import '../features/splash/splash_page.dart';
+import '../features/stats/presentation/pages/stats_page.dart';
+import '../features/tasks/presentation/pages/tasks_page.dart';
+
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
 
 final routerProvider = Provider<GoRouter>((ref) {
   final authState = ref.watch(authStateProvider);
 
   return GoRouter(
+    navigatorKey: _rootNavigatorKey,
     initialLocation: '/splash',
     routes: [
       GoRoute(
@@ -36,9 +46,31 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/forgot-password',
         builder: (context, state) => const ForgotPasswordPage(),
       ),
-      GoRoute(
-        path: '/dashboard',
-        builder: (context, state) => const DashboardPage(),
+      ShellRoute(
+        navigatorKey: _shellNavigatorKey,
+        builder: (context, state, child) => MainNavigationShell(child: child),
+        routes: [
+          GoRoute(
+            path: '/dashboard',
+            builder: (context, state) => const DashboardPage(),
+          ),
+          GoRoute(
+            path: '/tasks',
+            builder: (context, state) => const TasksPage(),
+          ),
+          GoRoute(
+            path: '/stats',
+            builder: (context, state) => const StatsPage(),
+          ),
+          GoRoute(
+            path: '/journal',
+            builder: (context, state) => const JournalPage(),
+          ),
+          GoRoute(
+            path: '/profile',
+            builder: (context, state) => const ProfilePage(),
+          ),
+        ],
       ),
       GoRoute(
         path: '/settings',
@@ -59,7 +91,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       final loggingIn = state.matchedLocation == '/login' ||
           state.matchedLocation == '/register' ||
-          state.matchedLocation == '/forgot-password';
+          state.matchedLocation == '/forgot-password' ;
 
       if (status == AuthStatus.unauthenticated) {
         // If not authenticated and not already going to an auth page, redirect to login
