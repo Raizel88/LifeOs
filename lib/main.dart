@@ -37,12 +37,15 @@ void main() async {
 }
 
 /// The root widget of the LifeOS application.
-class LifeApp extends StatelessWidget {
+class LifeApp extends ConsumerWidget {
   const LifeApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final goRouter = ref.watch(routerProvider);
+
     return MaterialApp.router(
+      title: 'LifeOS',
       debugShowCheckedModeBanner: false,
       theme: LifeTheme.darkTheme,
       routerConfig: goRouter,
